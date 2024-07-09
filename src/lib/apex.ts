@@ -1,7 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import upath from "upath";
 import mcache from "memory-cache";
-import * as fs from "fs";
 import { IError, IUserDetail, Predator } from "./type";
 import Kasumi from "kasumi.js";
 import { CustomStorage } from "@/config/type";
@@ -10,12 +8,31 @@ export let humanToTrackerGG: {
     [key: string]: "PC" | "PS4" | "X1";
 } = {
     origin: "PC",
-    psn: "PS4",
-    ps: "PS4",
-    xbox: "X1",
-    xbl: "X1",
-    playstation: "PS4",
+    ea: "PC",
     pc: "PC",
+    ps: "PS4",
+    ps1: "PS4",
+    ps2: "PS4",
+    ps3: "PS4",
+    ps4: "PS4",
+    ps5: "PS4",
+    psp: "PS4",
+    psv: "PS4",
+    psn: "PS4",
+    playstation: "PS4",
+    x1: "X1",
+    x1x: "X1",
+    x1s: "X1",
+    xss: "X1",
+    xsx: "X1",
+    xbox: "X1",
+    xbox1: "X1",
+    xboxone: "X1",
+    xbox360: "X1",
+    xboxseriess: "X1",
+    xboxseriesx: "X1",
+    xboxlive: "X1",
+    xbl: "X1",
 };
 
 export default class Apex {
@@ -114,7 +131,7 @@ export default class Apex {
         })
     }*/
     isError(payload: any): payload is IError {
-        return typeof payload.Error == "string";
+        return payload && typeof payload.Error == "string";
     }
 
     public async getPlayerDetail(

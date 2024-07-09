@@ -80,8 +80,8 @@ export class ApexSearchCommand extends BaseCommand {
                 username = connection.username;
             } else return session.reply("您还未绑定！请先绑定或输入用户名");
         }
-        if (humanToTrackerGG[plat]) {
-            platform = humanToTrackerGG[plat];
+        if (humanToTrackerGG[plat.toLowerCase()]) {
+            platform = humanToTrackerGG[plat.toLowerCase()];
         }
         const { err, data } = await session.send(
             new Card().addText("正在加载……请稍候")
