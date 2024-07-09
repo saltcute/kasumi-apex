@@ -103,8 +103,8 @@ export class ApexSearchCommand extends BaseCommand {
                 )
             );
         }
-        if (!user) {
-            this.logger.error();
+        if (!user || !user.legends || !user.global) {
+            this.logger.error(user);
             return session.update(
                 messageId,
                 new Card().addText(

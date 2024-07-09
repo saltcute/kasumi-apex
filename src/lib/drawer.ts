@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import fs from "fs";
 import upath from "upath";
 import puppeteer, { Browser, Page } from "puppeteer";
 
@@ -14,6 +14,51 @@ let browser: Browser | Promise<Browser>, page: Page | Promise<Page>;
     });
     page = await browser.newPage();
 })();
+const josefinSans = fs.readFileSync(
+    upath.join(
+        __dirname,
+        "..",
+        "..",
+        "assets",
+        "font",
+        "josefin_sans",
+        "josefin_sans_regular.ttf"
+    ),
+    {
+        encoding: "base64",
+    }
+);
+const secularOne = fs.readFileSync(
+    upath.join(
+        __dirname,
+        "..",
+        "..",
+        "assets",
+        "font",
+        "secular_one",
+        "secular_one_regular.ttf"
+    ),
+    {
+        encoding: "base64",
+    }
+);
+
+function getFonts() {
+    return `
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(data:font/truetype;charset=utf-8;base64,${josefinSans}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Secular One';
+    src: url(data:font/truetype;charset=utf-8;base64,${secularOne}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+`;
+}
 
 export async function generateImage({
     username,
@@ -84,12 +129,13 @@ export async function generateImage({
         upath.join(__dirname, "..", "..", "assets", "template.htm"),
         { encoding: "utf-8", flag: "r" }
     );
+    rawTemplate = rawTemplate.replace("<style>", `<style>\n${getFonts()}`);
     eval(`appliedTemplate = \`${rawTemplate.split("</script>")[1]}\`;`);
     appliedTemplate =
         rawTemplate.split("</script>")[0] + "</script>" + appliedTemplate;
     fs.mkdirSync(upath.join(__dirname, "data"), { recursive: true });
     fs.writeFileSync(
-        upath.join(__dirname, "data", "latest.htm"),
+        upath.join(__dirname, "..", "..", "assets", "latest.htm"),
         appliedTemplate
     );
     await page.setContent(appliedTemplate);

@@ -37,21 +37,6 @@ export default class Apex {
 
         this.client = client;
     }
-
-    _readJSON(path: string): any | undefined {
-        try {
-            return JSON.parse(
-                fs.readFileSync(path, { encoding: "utf-8", flag: "r" })
-            );
-        } catch (e) {
-            return undefined;
-        }
-    }
-    _writeJSON(path: string, data: any): void {
-        let dir = upath.dirname(path);
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-        fs.writeFileSync(path, JSON.stringify(data));
-    }
     getCache(keyp: string[]): Promise<any | undefined> {
         let key = keyp.join("");
         let cache = mcache.get(key);
@@ -137,8 +122,7 @@ export default class Apex {
         username: string
     ): Promise<IUserDetail | IError> {
         return this.cache(["player_detail", platform, username], async () => {
-            return this.requestor_als(upath.join("bridge"), {
-                auth: await this.client.config.getOne("apex::alsKey"),
+            return this.requestor_als("bridge", {
                 player: username,
                 platform,
             })
@@ -158,9 +142,7 @@ export default class Apex {
         return this.cache(
             ["predator_requirement", "RP", platform],
             async () => {
-                return this.requestor_als("predator", {
-                    auth: await this.client.config.getOne("apex::auth.ALSKey"),
-                })
+                return this.requestor_als("predator")
                     .then((res: Predator.IGameType) => {
                         return res["RP"][platform];
                     })
