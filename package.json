@@ -1,6 +1,6 @@
 {
     "name": "@saltcute/kasumi-apex",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Apex stats for Kasumi.js",
     "main": "dist/index.js",
     "scripts": {
