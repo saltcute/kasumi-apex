@@ -1,7 +1,7 @@
 {
-    "name": "kasumi-module-template",
+    "name": "@saltcute/kasumi-apex",
     "version": "0.1.0",
-    "description": "Template for Kasumi modules",
+    "description": "Apex stats for Kasumi.js",
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc && tsconfig-replace-paths -p tsconfig.json -s ./src -o ./dist",
@@ -11,26 +11,32 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HexaNona/kasumi-module-template.git"
+        "url": "git+https://github.com/saltcute/kasumi-apex.git"
     },
     "keywords": [
         "Kasumi",
         "kook",
         "bot"
     ],
-    "author": "HexaNona",
+    "author": "saltcute",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/HexaNona/kasumi-module-template/issues"
+        "url": "https://github.com/saltcute/kasumi-apex/issues"
     },
-    "homepage": "https://github.com/HexaNona/kasumi-module-template#readme",
+    "homepage": "https://github.com/saltcute/kasumi-apex#readme",
     "dependencies": {
         "kasumi.js": "^0.6.0",
+        "memory-cache": "^0.2.0",
         "prettier": "^3.3.2",
+        "puppeteer": "^22.12.1",
         "rimraf": "^5.0.8",
+        "sharp": "^0.33.4",
         "ts-node": "^10.9.1",
         "tsconfig-paths": "^4.1.2",
         "tsconfig-replace-paths": "^0.0.14",
         "typescript": "^5.5.3"
+    },
+    "devDependencies": {
+        "@types/memory-cache": "^0.2.5"
     }
 }

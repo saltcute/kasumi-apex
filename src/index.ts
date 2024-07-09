@@ -1,9 +1,9 @@
 import Kasumi, { BaseMenu } from "kasumi.js";
-import "./event";
-import RepeatKmdCommand from "commands/kmd";
+import apexSearchCommand from "./commands/search";
+import apexConnectCommand from "./commands/connect";
 
-export default class AppMenu extends BaseMenu {
-    constructor(name: string = "app") {
+export default class ApexMenu extends BaseMenu {
+    constructor(name: string = "apex") {
         super();
         this.name = name;
     }
@@ -11,6 +11,7 @@ export default class AppMenu extends BaseMenu {
     init(client: Kasumi<any>, loggerSequence: string[]): void {
         super.init(client, loggerSequence);
 
-        this.load(new RepeatKmdCommand());
+        this.load(apexSearchCommand);
+        this.load(apexConnectCommand);
     }
 }
