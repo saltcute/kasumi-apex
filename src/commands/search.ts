@@ -69,7 +69,7 @@ export class ApexSearchCommand extends BaseCommand {
         let last_ts = ts;
         this.logger.info(`Start generation: ${ts}`);
         let username = session.args[0];
-        let plat = session.args[1];
+        let plat = session.args[1] || "";
         let platform: "PC" | "PS4" | "X1" = "PC";
         if (!username) {
             let connection = await this.apexClient.getConnection(
