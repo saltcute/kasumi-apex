@@ -153,17 +153,16 @@ export default class Apex {
         });
     }
     public async getPredatorRequirement(
-        type: "RP" | "AP",
         platform: "PC" | "PS4" | "X1"
     ): Promise<Predator.IRequirement> {
         return this.cache(
-            ["predator_requirement", type, platform],
+            ["predator_requirement", "RP", platform],
             async () => {
                 return this.requestor_als("predator", {
                     auth: await this.client.config.getOne("apex::auth.ALSKey"),
                 })
                     .then((res: Predator.IGameType) => {
-                        return res[type][platform];
+                        return res["RP"][platform];
                     })
                     .catch((e) => {
                         throw e;

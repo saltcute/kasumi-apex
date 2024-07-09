@@ -34,9 +34,6 @@ export async function generateImage({
     br_current_rank_image,
     br_next_rank_image,
 
-    ar_current_rank_number,
-    ar_point_until_next_rank,
-    ar_next_rank_number,
     ar_current_rank_image,
     ar_next_rank_image,
 
@@ -67,9 +64,6 @@ export async function generateImage({
     br_current_rank_image: string;
     br_next_rank_image: string;
 
-    ar_current_rank_number: number;
-    ar_point_until_next_rank: number;
-    ar_next_rank_number: number;
     ar_current_rank_image: string;
     ar_next_rank_image: string;
 
@@ -85,9 +79,7 @@ export async function generateImage({
     page = await page;
     let appliedTemplate: string = "";
     let br_until = br_point_until_next_rank < 0 ? "over" : "until";
-    let ar_until = ar_point_until_next_rank < 0 ? "over" : "until";
     br_point_until_next_rank = Math.abs(br_point_until_next_rank);
-    ar_point_until_next_rank = Math.abs(ar_point_until_next_rank);
     let rawTemplate = fs.readFileSync(
         upath.join(__dirname, "..", "..", "assets", "template.htm"),
         { encoding: "utf-8", flag: "r" }

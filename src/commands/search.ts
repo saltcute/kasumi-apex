@@ -115,14 +115,8 @@ export class ApexSearchCommand extends BaseCommand {
                 );
                 last_ts = Date.now();
                 this.logger.debug("Generation: Recieved data from remote API");
-                let br_predator = await this.apexClient.getPredatorRequirement(
-                    "RP",
-                    platform
-                );
-                let ar_predator = await this.apexClient.getPredatorRequirement(
-                    "AP",
-                    platform
-                );
+                let br_predator =
+                    await this.apexClient.getPredatorRequirement(platform);
                 let formater = Intl.NumberFormat("en-US", {
                     notation: "compact",
                     maximumFractionDigits: 2,
@@ -200,10 +194,6 @@ export class ApexSearchCommand extends BaseCommand {
                         stat.rank.rankImg || Apex.defaultRankImage,
                     br_next_rank_image: Apex.predatorRankImage,
 
-                    ar_current_rank_number: stat.arena.rankScore,
-                    ar_point_until_next_rank:
-                        ar_predator.val - stat.arena.rankScore,
-                    ar_next_rank_number: ar_predator.val,
                     ar_current_rank_image:
                         stat.arena.rankImg || Apex.defaultRankImage,
                     ar_next_rank_image: Apex.predatorRankImage,
